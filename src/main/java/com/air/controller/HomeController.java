@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.air.model.AdminModel;
 import com.air.model.ProductModel;
 
 @Controller
@@ -29,4 +32,21 @@ public class HomeController {
 		mv.setViewName("index");
 		return mv;
 	}
+	
+	@RequestMapping("/login")
+	public ModelAndView  login() {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("Login page called");
+		mv.setViewName("login");
+		return mv;
+	}
+	
+	@PostMapping("/submit_login")
+	public ModelAndView  userAuthenticate(@ModelAttribute("admin") AdminModel admin) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("submited userdata page called, username: "+ admin.getUsername());
+		mv.setViewName("login");
+		return mv;
+	}
+	
 }
